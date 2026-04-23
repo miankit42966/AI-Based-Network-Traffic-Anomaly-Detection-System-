@@ -1,34 +1,53 @@
-# Network Anomaly Detection
+# AI-Based Network Traffic Anomaly Detection System
 
-An end-to-end network anomaly detection project with:
+An end-to-end network anomaly detection platform that uses machine learning and deep learning to identify suspicious traffic patterns, monitor congestion, and visualize insights through an interactive dashboard.
 
-- Dataset ingestion for CICIDS-style CSV files
-- Preprocessing, scaling, and imbalance handling
-- Multi-model training with `IsolationForest`, LSTM autoencoder, and gradient-boosted classifier
-- Real-time scoring and congestion monitoring
-- Streamlit dashboard with phase-wise execution view
-- Basic test coverage for the core pipeline
+## Overview
+
+This project is designed to help analyze network traffic data and detect anomalous behavior that may indicate attacks, misuse, or unusual activity. It combines data ingestion, preprocessing, feature engineering, multiple anomaly-detection models, and a Streamlit dashboard for real-time monitoring and reporting.
+
+## Key Features
+
+- End-to-end pipeline for loading, preprocessing, training, and inference
+- Support for CICIDS-style network traffic datasets
+- Multiple detection models including `IsolationForest`, LSTM autoencoder, and gradient-boosted classification
+- Weighted ensemble scoring for stronger anomaly detection
+- Real-time alerting and congestion monitoring
+- Interactive Streamlit dashboard for monitoring and analytics
+- Basic automated tests for core detection logic
+
+## Tech Stack
+
+- Python
+- Scikit-learn
+- TensorFlow/Keras
+- XGBoost
+- Pandas and NumPy
+- Streamlit
+- Pytest
 
 ## Project Structure
 
 ```text
-network_anomaly_detection/
+AI-Based-Network-Traffic-Anomaly-Detection-System/
 +-- data/
-¦   +-- raw/
-¦   +-- processed/
+|   +-- raw/
+|   +-- processed/
++-- dashboard/
+|   +-- app.py
+|   +-- pages/
++-- docs/
 +-- notebooks/
 +-- src/
-¦   +-- models/
-¦   +-- alerting.py
-¦   +-- cli.py
-¦   +-- config.py
-¦   +-- data_loader.py
-¦   +-- detector.py
-¦   +-- feature_extractor.py
-¦   +-- pipeline.py
-¦   +-- preprocessing.py
-+-- dashboard/
-¦   +-- app.py
+|   +-- models/
+|   +-- alerting.py
+|   +-- cli.py
+|   +-- config.py
+|   +-- data_loader.py
+|   +-- detector.py
+|   +-- feature_extractor.py
+|   +-- pipeline.py
+|   +-- preprocessing.py
 +-- tests/
 +-- requirements.txt
 +-- README.md
@@ -37,70 +56,76 @@ network_anomaly_detection/
 ## Quick Start
 
 1. Create and activate a virtual environment.
-2. Install dependencies:
+2. Install the project dependencies.
+3. Run the training and detection pipeline.
+4. Launch the dashboard for visual monitoring.
 
 ```bash
 pip install -r requirements.txt
-```
-
-3. Run the end-to-end phase pipeline with a raw CSV:
-
-```bash
-python -m src.cli run-all --data-path data/raw/CICIDS2017_sample.csv
-```
-
-4. Launch the dashboard:
-
-```bash
+python -m src.cli run-all --data-path data/raw/your_dataset.csv
 streamlit run dashboard/app.py
 ```
 
 ## Pipeline Phases
 
-### Phase 1: Data Collection
+### 1. Data Collection
 
-- Load a CICIDS/UNSW/KDD-style CSV using `src.data_loader`
-- Optional synthetic dataset generation for local testing
-- Optional live packet capture hooks for `pyshark` and `scapy`
+- Load CICIDS, UNSW, or similar network traffic datasets
+- Support synthetic sample generation for local testing
+- Optional hooks for live packet capture integrations
 
-### Phase 2: Preprocessing & Feature Engineering
+### 2. Preprocessing and Feature Engineering
 
-- Column cleanup
-- Missing value handling
-- Label encoding
-- Standard scaling
-- Optional SMOTE on the training split
+- Clean and normalize raw traffic data
+- Handle missing values and categorical labels
+- Scale features for downstream models
+- Optional class balancing using SMOTE
 
-### Phase 3: AI Model Training
+### 3. Model Training
 
 - `IsolationForest` for unsupervised anomaly scoring
-- LSTM autoencoder for reconstruction-error based anomaly scoring
-- XGBoost classifier with a safe sklearn fallback if XGBoost is unavailable
-- Weighted ensemble fusion
+- LSTM autoencoder for reconstruction-based anomaly detection
+- XGBoost classifier with safe fallback behavior when unavailable
+- Ensemble fusion for improved detection performance
 
-### Phase 4: Real-Time Detection
+### 4. Real-Time Detection
 
-- Sliding window score aggregation
-- Congestion estimation using packets-per-second
-- Alert generation with severity bands
+- Sliding-window anomaly scoring
+- Traffic congestion estimation
+- Severity-based alert generation
 
-### Phase 5: Monitoring Dashboard
+### 5. Monitoring Dashboard
 
-- Live metrics
-- Flow trend chart
-- Anomaly scatter overlay
-- Alert table
-- Phase flow diagram matching the requested execution layout
+- Live metrics and anomaly trends
+- Flow analysis and visualization
+- Alert inspection and execution tracking
+- Reporting-focused admin views
 
-### Phase 6: Testing & Evaluation
+### 6. Testing and Evaluation
 
-- Classification report
-- ROC-AUC
-- Confusion matrix
+- Classification metrics
+- ROC-AUC analysis
+- Confusion matrix evaluation
 - Latency benchmarking
+
+## Use Cases
+
+- Intrusion detection research
+- Security analytics demonstrations
+- Network monitoring prototypes
+- AI-based cyber threat detection projects
 
 ## Notes
 
-- The repo is production-oriented scaffolding. You should plug in real datasets under `data/raw/`.
-- LSTM training expects sequentialized feature windows; if TensorFlow is missing, the project skips that model gracefully.
-- Live capture requires appropriate OS-level privileges and a valid network interface.
+- Large raw datasets and generated outputs are excluded from version control.
+- Place your datasets inside `data/raw/` before running the pipeline.
+- If TensorFlow is unavailable, the LSTM-based model may be skipped gracefully.
+- Live capture features may require additional OS-level privileges and supported interfaces.
+
+## GitHub Description
+
+AI-powered network traffic anomaly detection system using machine learning, deep learning, and a Streamlit dashboard for real-time monitoring.
+
+## Suggested GitHub Topics
+
+`cybersecurity`, `network-security`, `anomaly-detection`, `machine-learning`, `deep-learning`, `streamlit`, `python`, `intrusion-detection`, `xgboost`, `lstm`
