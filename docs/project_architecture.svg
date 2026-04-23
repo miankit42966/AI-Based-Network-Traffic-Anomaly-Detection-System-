@@ -1,0 +1,90 @@
+﻿<svg width="1600" height="1160" viewBox="0 0 1600 1160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6efe4"/>
+      <stop offset="100%" stop-color="#e8ddd1"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#7b6d5a" flood-opacity="0.18"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#5f6666"/>
+    </marker>
+    <style>
+      .title { font: 700 34px 'Segoe UI', Arial, sans-serif; fill: #223031; }
+      .subtitle { font: 500 18px 'Segoe UI', Arial, sans-serif; fill: #5c6b6b; }
+      .box-title { font: 700 24px 'Segoe UI', Arial, sans-serif; }
+      .box-text { font: 500 16px 'Segoe UI', Arial, sans-serif; fill: #485454; }
+      .small { font: 500 15px 'Segoe UI', Arial, sans-serif; fill: #596666; }
+      .label { font: 600 15px 'Segoe UI', Arial, sans-serif; fill: #475252; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1160" fill="url(#bg)"/>
+
+  <text x="800" y="62" text-anchor="middle" class="title">Network Anomaly Detection System Architecture</text>
+  <text x="800" y="95" text-anchor="middle" class="subtitle">Datasets, preprocessing, ensemble models, detection engine, dashboard, SQLite auth and history</text>
+
+  <rect x="90" y="150" rx="24" ry="24" width="1420" height="150" fill="#d9ebff" stroke="#6f99c3" stroke-width="2" filter="url(#shadow)"/>
+  <text x="800" y="195" text-anchor="middle" class="box-title" fill="#27527d">1. Data Sources</text>
+  <text x="800" y="228" text-anchor="middle" class="box-text">
+    <tspan x="800" dy="0">CICIDS-2017 shard | CICIDS-2018 shard</tspan>
+    <tspan x="800" dy="24">Synthetic fallback dataset | Optional live packet capture hooks</tspan>
+  </text>
+  <text x="800" y="278" text-anchor="middle" class="small">Files: data/raw/*, src/data_loader.py</text>
+
+  <line x1="800" y1="300" x2="800" y2="342" stroke="#5f6666" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="90" y="350" rx="24" ry="24" width="1420" height="170" fill="#dbf2e5" stroke="#79b18f" stroke-width="2" filter="url(#shadow)"/>
+  <text x="800" y="395" text-anchor="middle" class="box-title" fill="#2a6a4b">2. Preprocessing and Feature Engineering</text>
+  <text x="800" y="428" text-anchor="middle" class="box-text">
+    <tspan x="800" dy="0">Cleaning | Missing value handling | Label encoding | Scaling | SMOTE</tspan>
+    <tspan x="800" dy="24">Flow feature generation and sequence preparation</tspan>
+    <tspan x="800" dy="24">Drops high-cardinality columns such as timestamps and IP identifiers</tspan>
+  </text>
+  <text x="800" y="490" text-anchor="middle" class="small">Files: src/preprocessing.py, src/feature_extractor.py</text>
+
+  <line x1="800" y1="520" x2="800" y2="562" stroke="#5f6666" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="90" y="570" rx="24" ry="24" width="1420" height="180" fill="#e8e0ff" stroke="#9581cf" stroke-width="2" filter="url(#shadow)"/>
+  <text x="800" y="615" text-anchor="middle" class="box-title" fill="#5c4e9f">3. AI Training Layer</text>
+  <text x="420" y="655" text-anchor="middle" class="label">Isolation Forest</text>
+  <text x="800" y="655" text-anchor="middle" class="label">LSTM Autoencoder</text>
+  <text x="1180" y="655" text-anchor="middle" class="label">XGBoost / Gradient Boosting</text>
+  <text x="420" y="682" text-anchor="middle" class="small">Unsupervised anomaly model</text>
+  <text x="800" y="682" text-anchor="middle" class="small">Sequence reconstruction model</text>
+  <text x="1180" y="682" text-anchor="middle" class="small">Supervised attack classifier</text>
+  <text x="800" y="720" text-anchor="middle" class="small">Files: src/models/*, src/pipeline.py</text>
+
+  <line x1="800" y1="750" x2="800" y2="792" stroke="#5f6666" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="90" y="810" rx="24" ry="24" width="680" height="180" fill="#f7e7cf" stroke="#c59654" stroke-width="2" filter="url(#shadow)"/>
+  <text x="430" y="855" text-anchor="middle" class="box-title" fill="#87580d">4. Detection Engine</text>
+  <text x="430" y="888" text-anchor="middle" class="box-text">
+    <tspan x="430" dy="0">Feature extraction from traffic</tspan>
+    <tspan x="430" dy="24">Ensemble score calculation</tspan>
+    <tspan x="430" dy="24">Congestion monitoring and alert triggering</tspan>
+  </text>
+  <text x="430" y="962" text-anchor="middle" class="small">Files: src/detector.py, src/alerting.py</text>
+
+  <rect x="840" y="810" rx="24" ry="24" width="670" height="180" fill="#ffe4dc" stroke="#d07a5a" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1175" y="855" text-anchor="middle" class="box-title" fill="#8a3f2d">5. Dashboard and Control Layer</text>
+  <text x="1175" y="888" text-anchor="middle" class="box-text">
+    <tspan x="1175" dy="0">Streamlit multi-page UI | Login and authentication</tspan>
+    <tspan x="1175" dy="24">Reports | Evaluation analytics | Admin panel</tspan>
+    <tspan x="1175" dy="24">Responsive layout | Training controls | Theme switch</tspan>
+  </text>
+  <text x="1175" y="962" text-anchor="middle" class="small">Files: dashboard/app.py, dashboard/pages/*, dashboard/common.py</text>
+
+  <line x1="770" y1="900" x2="840" y2="900" stroke="#5f6666" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="1050" y="1015" rx="20" ry="20" width="380" height="110" fill="#e6f2d7" stroke="#98ac69" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1240" y="1053" text-anchor="middle" class="box-title" fill="#5c7030">6. Persistence</text>
+  <text x="1240" y="1083" text-anchor="middle" class="box-text">SQLite database for authentication and run history</text>
+  <text x="1240" y="1108" text-anchor="middle" class="small">File: dashboard/db.py</text>
+
+  <line x1="1175" y1="990" x2="1175" y2="1015" stroke="#5f6666" stroke-width="3"/>
+  <line x1="1175" y1="1015" x2="1240" y2="1015" stroke="#5f6666" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <text x="170" y="1140" class="small">Generated for final-year project documentation and presentation use</text>
+</svg>

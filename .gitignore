@@ -1,0 +1,29 @@
+# Python caches
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local test/cache artifacts
+pytest-cache-files-*/
+
+# Runtime logs and local app state
+*.log
+*.out.log
+*.err.log
+*.db
+
+# Generated data, models, and local outputs
+data/processed/*
+!data/processed/.gitkeep
+data/raw/*
+!data/raw/.gitkeep
